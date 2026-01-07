@@ -1,0 +1,18 @@
+# Data files
+data/
+*.csv
+*.log
+
+# Runtime outputs
+monitor_results.csv
+immediate_alerts.csv
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
