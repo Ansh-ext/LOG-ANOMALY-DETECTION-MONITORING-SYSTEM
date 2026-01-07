@@ -43,10 +43,22 @@ all_alerts = pd.concat(
     sort=False
 )
 
-all_alerts = all_alerts.sort_values(
-    "event_time",
-    ascending=False
-)
+if not all_alerts.empty:
+    if "event_time" in all_alerts.columns:
+        all_alerts = all_alerts.sort_values(
+            "event_time",
+            ascending=False
+        )
+    elif "time_window" in all_alerts.columns:
+        all_alerts = all_alerts.sort_values(
+            "time_window",
+            ascending=False
+        )
+    else:
+        st.warning("⚠️ No time column found. Showing unsorted alerts.")
+else:
+    st.info("No alerts available.")
+
 
 st.set_page_config(layout="wide")
 
