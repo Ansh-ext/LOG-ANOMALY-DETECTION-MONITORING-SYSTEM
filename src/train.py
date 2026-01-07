@@ -1,4 +1,3 @@
-# src/train.py
 import joblib
 import argparse
 
@@ -25,13 +24,11 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # Load logs
     with open(args.logs, "r", encoding="utf-8") as f:
         raw_logs = f.readlines()
 
     print(f"Loaded {len(raw_logs)} log lines")
 
-    # Preprocess
     cleaned_logs = []
 
     for line in raw_logs:
@@ -49,7 +46,7 @@ def main():
 
     print(f"Preprocessed {len(cleaned_logs)} logs")
 
-    # TF-IDF
+  
     vectorizer = TfidfVectorizer(
         max_features=50,
         ngram_range=(1, 2),
@@ -61,11 +58,11 @@ def main():
 
     X = vectorizer.fit_transform(cleaned_logs)
 
-    # Scale
+    
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X.toarray())
 
-    # Train model
+    
     model = IsolationForest(
         n_estimators=100,
         contamination=0.03,
@@ -74,7 +71,7 @@ def main():
     )
     model.fit(X_scaled)
 
-    # Save artifacts
+    
     joblib.dump(vectorizer, "models/tfidf_vectorizer_train.pkl")
     joblib.dump(scaler, "models/scaler_train.pkl")
     joblib.dump(model, "models/isolation_forest_train.pkl")
