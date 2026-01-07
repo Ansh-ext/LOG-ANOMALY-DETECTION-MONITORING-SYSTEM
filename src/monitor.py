@@ -1,4 +1,3 @@
-# src/monitor.py
 from parser import parse_log_line
 import time
 import argparse
