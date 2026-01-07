@@ -17,7 +17,6 @@ def parse_log_line(log_line):
 
     data = match.groupdict()
 
-    # Convert HDFS date+time → datetime
     event_time = datetime.strptime(
         data["date"] + data["time"], "%m%d%y%H%M%S"
     )
