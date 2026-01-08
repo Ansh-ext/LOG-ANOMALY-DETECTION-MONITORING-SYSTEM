@@ -96,7 +96,7 @@ if not all_alerts.empty:
 
     if latest["alert_type"] == "IMMEDIATE":
         st.error(
-            f"🚨 IMMEDIATE ALERT\n\n"
+            f"🚨 IMMEDIATE ALERT \n\n"
             f"Level: {latest['log_level']}\n"
             f"Component: {latest['component']}\n"
             f"Message: {latest['message']}"
