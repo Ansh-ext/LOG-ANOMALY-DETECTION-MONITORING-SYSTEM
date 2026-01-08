@@ -33,9 +33,10 @@ Both alert types are unified and visualized in a dashboard.
 
 
 
-<img width="1713" height="148" alt="image" src="https://github.com/user-attachments/assets/c9909fb0-b543-40ae-9543-f3aea0939287" />
-<img width="1798" height="853" alt="image" src="https://github.com/user-attachments/assets/6e79a40e-67f8-4e20-9749-ba027f032875" />
-<img width="1748" height="520" alt="image" src="https://github.com/user-attachments/assets/b7c70343-f5aa-4ebd-92f9-298377ad5ee5" />
+
+<img width="1758" height="840" alt="image" src="https://github.com/user-attachments/assets/505bcb90-3842-4f1c-9840-7399fd18cdff" />
+<img width="1774" height="842" alt="image" src="https://github.com/user-attachments/assets/1135a2d0-f64c-4345-90ad-ac7a9fa934f0" />
+<img width="1775" height="847" alt="image" src="https://github.com/user-attachments/assets/e9220b0e-062f-422e-b539-e8f41a90cf55" />
 
 
 
@@ -47,3 +48,4 @@ The ML model detects statistical rarity, not semantic meaning
 A single error log may not trigger an alert
 
 Alerts focus on behavioral changes over time
+
