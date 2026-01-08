@@ -64,25 +64,6 @@ st.set_page_config(layout="wide")
 
 st.title("🚨 Log Anomaly Monitoring Dashboard")
 
-if not all_alerts.empty:
-    latest = all_alerts.iloc[0]
-
-    if latest["alert_type"] == "IMMEDIATE":
-        st.error(
-            f"🚨 IMMEDIATE ALERT\n\n"
-            f"Level: {latest['log_level']}\n"
-            f"Component: {latest['component']}\n"
-            f"Message: {latest['message']}"
-        )
-    else:
-        st.warning(
-            f"⚠️ BEHAVIORAL ALERT\n\n"
-            f"Anomaly Rate Spike Detected\n"
-            f"Rate: {latest['anomaly_rate']:.2%}"
-        )
-else:
-    st.success("✅ System operating normally")
-
 st.subheader("📄 Monitoring Data")
 
 DATA_FILE = "monitor_results.csv"
@@ -109,6 +90,37 @@ else:
 
 
 st.write("Total logs processed:", len(df))
+
+if not all_alerts.empty:
+    latest = all_alerts.iloc[0]
+
+    if latest["alert_type"] == "IMMEDIATE":
+        st.error(
+            f"🚨 IMMEDIATE ALERT\n\n"
+            f"Level: {latest['log_level']}\n"
+            f"Component: {latest['component']}\n"
+            f"Message: {latest['message']}"
+        )
+    else:
+        st.warning(
+            f"⚠️ BEHAVIORAL ALERT\n\n"
+            f"Anomaly Rate Spike Detected\n"
+            f"Rate: {latest['anomaly_rate']:.2%}"
+        )
+else:
+    st.success("✅ System operating normally")
+
+st.subheader("🚨 All Alerts")
+
+if not all_alerts.empty:
+    st.dataframe(
+        all_alerts.sort_values("event_time", ascending=False),
+        use_container_width=True
+    )
+else:
+    st.info("No alerts to display.")
+
+
 
 # -------- Anomaly Rate Over Time --------
 agg = (
