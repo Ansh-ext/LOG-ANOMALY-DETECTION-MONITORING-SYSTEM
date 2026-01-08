@@ -83,7 +83,29 @@ if not all_alerts.empty:
 else:
     st.success("✅ System operating normally")
 
-df = pd.read_csv("monitor_results.csv", parse_dates=["event_time","ingest_time", "time_window"])
+st.subheader("📄 Monitoring Data")
+
+DATA_FILE = "monitor_results.csv"
+
+if os.path.exists(DATA_FILE):
+    df = pd.read_csv(
+        DATA_FILE,
+        parse_dates=["event_time", "ingest_time", "time_window"]
+    )
+    st.success("Loaded live monitoring data")
+else:
+    st.warning("monitor_results.csv not found.")
+    st.info("Upload a CSV file to visualize monitoring results.")
+
+    uploaded_file = st.file_uploader(
+        "Upload monitor_results.csv",
+        type=["csv"]
+    )
+
+    if uploaded_file is None:
+        st.stop()
+
+    df = pd.read_csv(uploaded_file)
 
 
 st.write("Total logs processed:", len(df))
@@ -108,7 +130,7 @@ st.scatter_chart(
 )
 
 st.subheader("Recent Anomalies")
-st.dataframe(df[df["is_anomaly"] == 1].tail(20))
+st.dataframe(df[df["is_anomaly"] == 1].tail(10))
 
 st.subheader("All anomalies")
 st.dataframe(df[df["is_anomaly"] == 1])
